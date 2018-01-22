@@ -3,19 +3,21 @@
   <div class="card mt-2">
 
     <div class="card-header">
-      Wallet # 1 : 0760c3db2eb070eae6bbc7dd631379be731ae313cfab399ccff044901dc5d32e
+      <div><strong># 1</strong></div>
+      {{wallet.hash}}
     </div>
     <div class="card-body">
 
       <div class="row">
         <div class="col-6">
+          <h4>Balance: </h4>
           <div class="form-group">
-            <label>To</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+            <label>Send to</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="hash address">
           </div>
           <div class="form-group">
             <label>Amount</label>
-            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="1 Coin">
           </div>
         </div>
         <div class="col-6">
@@ -23,8 +25,9 @@
         </div>
       </div>
 
-
-      <button class="btn btn-primary">Send</button>
+      <button class="btn btn-primary">Send Coins</button>
+      <button class="btn btn-success" (click)="mine()">Mine Coins</button>
+      <button class="btn btn-success" (click)="updateBalance()">Update Balance</button>
     </div>
   </div>
 </div>

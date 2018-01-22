@@ -7,7 +7,6 @@ export class OperationsService {
   }
 
   getBlocks() {
-    return this.http.get('http://192.168.99.100:3001/blocks').map(res => res.json());
+    return this.http.get('http://localhost:8080/blocks').map(res => res.json());
   }
-
 }
