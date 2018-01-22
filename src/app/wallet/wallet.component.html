@@ -3,29 +3,51 @@
   <div class="card mt-2">
 
     <div class="card-header">
-      <div><strong># 1</strong></div>
+      <div>
+        <strong># 1</strong>
+      </div>
       {{wallet.hash}}
     </div>
     <div class="card-body">
 
       <div class="row">
+
         <div class="col-6">
           <h4>Balance: </h4>
-          <div class="form-group">
-            <label>Send to</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="hash address">
-          </div>
-          <div class="form-group">
-            <label>Amount</label>
-            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="1 Coin">
-          </div>
+          <form #sendForm="ngForm" novalidate>
+            <div class="form-group">
+              <label for="inputTo">Send to</label>
+              <input
+                required
+                [ngModel]="sendObj.to"
+                type="text"
+                minlength="10"
+                name="to"
+                id="to"
+                class="form-control"
+                placeholder="hash address">
+            </div>
+            <div class="form-group">
+              <label for="inputAmount">Amount</label>
+              <input
+                required
+                [ngModel]="sendObj.amount"
+                type="number" name="amount"
+                class="form-control"
+                id="amount"
+                pattern="^\d*[1-9]\d*$"
+                max="100"
+                placeholder="1 Coin">
+            </div>
+          </form>
         </div>
         <div class="col-6">
 
         </div>
+
       </div>
 
-      <button class="btn btn-primary">Send Coins</button>
+      <button class="btn btn-primary" [disabled]="!sendForm.form.valid" (click)="sendCoins(sendForm)">Send Coins</button>
       <button class="btn btn-success" (click)="mine()">Mine Coins</button>
       <button class="btn btn-success" (click)="updateBalance()">Update Balance</button>
     </div>

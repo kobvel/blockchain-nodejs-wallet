@@ -19,4 +19,8 @@ export class AppService {
   getBalance(address: string) {
     return this.http.get(`http://localhost:8080/balance/${address}`).map(res => res.json());
   }
+
+  sendCoins(to: string, from: string, amount: number) {
+    return this.http.post('http://localhost:8080/transfer', { to, from, amount }).map(res => res.json());
+  }
 }
