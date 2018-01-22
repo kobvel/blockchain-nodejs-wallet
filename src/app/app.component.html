@@ -1,132 +1,15 @@
 <div class="container-fluid root">
-  <div class="row">
-    <h1>Operations for Node: </h1>
 
-    <select class="custom-select ml-4" id="inputGroupSelect01">
-      <option value="1" selected>localhost:3001</option>
-      <option value="2">localhost:3002</option>
-      <option value="3">localhost:3003</option>
-    </select>
-
-
-  </div>
   <div class="row row-offcanvas row-offcanvas-right">
 
     <div class="col-12 col-lg-6">
-      <div class="node-container">
-        <table class="table table-sm table-dark">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th scope="row"></th>
-              <td colspan="2"></td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-
+      <app-operations></app-operations>
     </div>
 
 
     <div class="col-12 col-lg-6">
-      <div class="card mt-2" *ngFor="let item of [1,2,3,4]">
-        <div class="card-header">
-          Wallet # {{item}} : 0760c3db2eb070eae6bbc7dd631379be731ae313cfab399ccff044901dc5d32e
-        </div>
-        <div class="card-body">
+      <app-wallet *ngFor="let item of [1,2,3,4]"></app-wallet>
 
-          <div class="row">
-            <div class="col-6">
-              <div class="form-group">
-                <label>To</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-              </div>
-              <div class="form-group">
-                <label>Amount</label>
-                <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-              </div>
-            </div>
-            <div class="col-6">
-
-            </div>
-          </div>
-
-
-          <button class="btn btn-primary">Send</button>
-        </div>
-      </div>
     </div>
 
   </div>

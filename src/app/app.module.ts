@@ -4,16 +4,22 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
+import { OperationsComponent } from './operations/operations.component';
+import { WalletComponent } from './wallet/wallet.component';
+import { OperationsService } from './operations/operations.service';
+import 'rxjs/Rx';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    OperationsComponent,
+    WalletComponent
   ],
   imports: [
     HttpModule,
     BrowserModule
   ],
-  providers: [AppService],
+  providers: [AppService, OperationsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,11 @@
+<div class="node-container">
+  <table class="table table-sm table-dark">
+    <tbody>
+      <tr *ngFor="let item of blocks">
+        <th># {{item.index}}</th>
+        <td>{{item.timestamp | date: 'dd.MM.yyyy hh:mm:ss'}} </td>
+        <td>pow: {{item.data.pow}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
