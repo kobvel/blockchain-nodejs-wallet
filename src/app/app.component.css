@@ -1,0 +1,13 @@
+.root {
+  margin-top: 25px;
+}
+
+.node-container {
+  min-height: 750px;
+  background-color: #212529;
+}
+
+.wallet {
+  border: 1px solid black;
+  border-radius: 5px;
+}
