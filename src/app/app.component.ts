@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs/Subscription';
 import { Component } from '@angular/core';
-import { OnInit, OnDestroy, QueryList, ViewChildren } from '@angular/core';
+import { OnInit, OnDestroy } from '@angular/core';
 import { AppService } from 'app/app.service';
 import { WalletComponent } from './wallet/wallet.component';
 import CoinKey from 'coinkey'
@@ -14,8 +14,8 @@ export class AppComponent implements OnInit, OnDestroy {
   wallets: any[] = [];
   txs: any[] = [];
   sub: Subscription;
+  walletFilter = '';
   interval: any;
-  @ViewChildren('walletRef') private walletRefs: QueryList<WalletComponent>;
 
   constructor(private appService: AppService) { }
 
@@ -23,7 +23,12 @@ export class AppComponent implements OnInit, OnDestroy {
     this.newWallet();
 
     this.interval = setInterval(() => {
-      this.sub = this.appService.getTransactions().subscribe(txs => this.txs = txs);
+      this.sub = this.appService.getTransactions().subscribe(txs => {
+        this.txs = txs.filter(tx => {
+          const bothAddresses = tx.from + tx.to;
+          return !this.walletFilter || bothAddresses.includes(this.walletFilter);
+        });
+      });
     }, 1000);
 
   }

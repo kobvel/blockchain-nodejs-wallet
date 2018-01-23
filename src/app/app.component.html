@@ -4,8 +4,8 @@
 
     <div class="col-12 col-lg-6">
       <div class="input-group mb-2">
-        <select class="custom-select" id="selectGroupt">
-          <option selected>All transactions</option>
+        <select class="custom-select" [(ngModel)]="walletFilter">
+          <option value="">All transactions</option>
           <option [value]="wallet.hash" *ngFor="let wallet of wallets">{{wallet.hash | hashname}}</option>
         </select>
       </div>
