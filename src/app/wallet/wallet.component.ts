@@ -1,5 +1,5 @@
 import { AppService } from '../app.service';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Inject } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -11,7 +11,7 @@ export class WalletComponent {
   @Input() wallet = null;
   sendObj: { to: string, amount: number } = { to: '', amount: 1 };
 
-  constructor(private apiService: AppService) {
+  constructor(private apiService: AppService, @Inject('Hashwords') public hashwords: any) {
 
   }
   mine() {

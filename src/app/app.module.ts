@@ -21,7 +21,7 @@ import 'rxjs/Rx';
     FormsModule,
     BrowserModule
   ],
-  providers: [AppService, OperationsService],
+  providers: [AppService, OperationsService, { provide: 'Hashwords', useValue: window['hashwords']() }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

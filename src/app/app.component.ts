@@ -10,9 +10,6 @@ import CoinKey from 'coinkey'
 })
 export class AppComponent implements OnInit {
   wallets: any = [];
-  hashDictionary = {
-    d6656d585dfea0b12c9a3a332d0d50bd8b4d7fb5adcd6f82d92bab7158dc3dd3: 'miner server'
-  };
 
   constructor(private appService: AppService) { }
 
@@ -22,8 +19,6 @@ export class AppComponent implements OnInit {
   newWallet() {
     const newKey = CoinKey.createRandom();
     newKey.hash = newKey.privateKey.toString('hex');
-    newKey.name = 'Wallet #' + this.wallets.length;
-    this.hashDictionary[newKey.hash] = newKey.name;
-    this.wallets.push(newKey);
+    this.wallets = [newKey, ...this.wallets];
   }
 }
