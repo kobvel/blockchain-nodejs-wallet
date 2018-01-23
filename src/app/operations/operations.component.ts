@@ -15,16 +15,12 @@ export class OperationsComponent implements OnInit, OnDestroy {
   sub: Subscription;
   interval: any;
 
-  constructor(private opService: OperationsService, @Inject('Hashwords') private hashwords: any) { }
+  constructor(private opService: OperationsService) { }
 
   ngOnInit() {
     this.interval = setInterval(() => {
       this.sub = this.opService.getTransactions().subscribe(transactions => {
-        this.transactions = transactions.map(tx => {
-          if (tx.from.length > 20) { tx.from = this.hashwords.hashStr(tx.from); }
-          if (tx.to.length > 20) { tx.to = this.hashwords.hashStr(tx.to); }
-          return tx;
-        });
+        this.transactions = transactions;
         this.transactions.map(tx => console.log())
       });
     }, 1000);

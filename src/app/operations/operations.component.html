@@ -1,4 +1,6 @@
+
 <div class="node-container">
+
   <table class="table table-sm table-dark">
     <thead>
       <tr>
@@ -11,8 +13,8 @@
     <tbody>
       <tr *ngFor="let item of transactions | slice:0:20;">
         <td>{{item.timestamp | date: 'dd.MM.yyyy hh:mm:ss'}} </td>
-        <td>{{item.from}}</td>
-        <td>{{item.to}}</td>
+        <td>{{item.from | hashname}}</td>
+        <td>{{item.to | hashname}}</td>
         <td>{{item.amount}}</td>
       </tr>
     </tbody>
