@@ -9,7 +9,7 @@
 
     <div class="col-12 col-lg-6">
       <button class="btn btn-primary" (click)="newWallet()">Generate new wallet</button>
-      <app-wallet *ngFor="let wallet of wallets" [wallet]="wallet"></app-wallet>
+      <app-wallet #walletRef *ngFor="let wallet of wallets" [wallet]="wallet" (transferCoins)="sendCoins($event)"></app-wallet>
     </div>
 
   </div>

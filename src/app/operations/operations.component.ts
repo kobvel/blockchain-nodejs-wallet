@@ -27,7 +27,7 @@ export class OperationsComponent implements OnInit, OnDestroy {
         });
         this.transactions.map(tx => console.log())
       });
-    }, 2000);
+    }, 1000);
   }
 
   ngOnDestroy() {

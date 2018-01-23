@@ -1,5 +1,6 @@
 import { AppService } from '../app.service';
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input, Inject, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -9,6 +10,8 @@ import { Component, Input, Inject } from '@angular/core';
 })
 export class WalletComponent {
   @Input() wallet = null;
+  @Output() transferCoins = new EventEmitter();
+
   balance = 0;
   sendObj: { to: string, amount: number } = { to: '', amount: 1 };
 
@@ -27,10 +30,11 @@ export class WalletComponent {
 
   sendCoins(form) {
     if (form.valid) {
-      this.apiService.sendCoins(form.value.to, this.wallet.hash, form.value.amount)
-        .subscribe(res => {
-          this.updateBalance();
-        });
+      const from = this.wallet.hash;
+      const amount = form.value.amount;
+      const to = form.value.to;
+
+      this.transferCoins.emit({ from, to, amount });
     } else {
       alert('Something wrong with the form!');
     }
