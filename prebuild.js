@@ -15,9 +15,11 @@ const environmentTemplate = fs.readFileSync(
     encoding: 'utf-8'
   }
 );
-
+const defaultENV = {
+  PEERS: 'http://localhost:8080;http://localhost:3001'
+}
 // Generate output data
-const output = ejs.render(environmentTemplate, Object.assign({}, process.env));
+const output = ejs.render(environmentTemplate, Object.assign({}, defaultENV, process.env));
 // Write environment file
 fs.writeFileSync(path.join(environmentFilesDirectory, targetEnvironmentFileName), output);
 

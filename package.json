@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prebuild": "node prebuild.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
