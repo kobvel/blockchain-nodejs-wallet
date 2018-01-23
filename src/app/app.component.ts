@@ -14,10 +14,15 @@ export class AppComponent implements OnInit, OnDestroy {
   wallets: any[] = [];
   txs: any[] = [];
   sub: Subscription;
+  hosts: string[] = [];
+  selectedHost = this.appService.selectedHost;
   walletFilter = '';
   interval: any;
 
-  constructor(private appService: AppService) { }
+  constructor(public appService: AppService) {
+    this.hosts = this.appService.hosts;
+    this.selectedHost = this.appService.selectedHost;
+  }
 
   ngOnInit() {
     this.newWallet();
@@ -36,6 +41,10 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     clearInterval(this.interval);
     this.sub && this.sub.unsubscribe();
+  }
+
+  onHostChange(newHost) {
+    this.appService.selectedHost = newHost;
   }
 
   newWallet() {

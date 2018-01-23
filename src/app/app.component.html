@@ -8,6 +8,9 @@
           <option value="">All transactions</option>
           <option [value]="wallet.hash" *ngFor="let wallet of wallets">{{wallet.hash | hashname}}</option>
         </select>
+        <select class="custom-select ml-2" [ngModel]="selectedHost" (ngModelChange)="onHostChange($event)" >
+          <option [value]="host" *ngFor="let host of hosts">{{host}}</option>
+        </select>
       </div>
       <app-operations [transactions]="txs"></app-operations>
     </div>
