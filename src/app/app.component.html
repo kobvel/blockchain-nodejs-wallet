@@ -3,13 +3,24 @@
   <div class="row row-offcanvas row-offcanvas-right">
 
     <div class="col-12 col-lg-6">
-      <app-operations></app-operations>
+      <div class="input-group mb-2">
+        <select class="custom-select" id="selectGroupt">
+          <option selected>All transactions</option>
+          <option [value]="wallet.hash" *ngFor="let wallet of wallets">{{wallet.hash | hashname}}</option>
+        </select>
+      </div>
+      <app-operations [transactions]="txs"></app-operations>
     </div>
 
 
     <div class="col-12 col-lg-6">
       <button class="btn btn-primary" (click)="newWallet()">Generate new wallet</button>
-      <app-wallet #walletRef *ngFor="let wallet of wallets" [wallet]="wallet" (transferCoins)="sendCoins($event)"></app-wallet>
+      <app-wallet
+        *ngFor="let wallet of wallets"
+        [wallet]="wallet"
+        (mineCoins)="mineCoins($event)"
+        (transferCoins)="sendCoins($event)">
+      </app-wallet>
     </div>
 
   </div>

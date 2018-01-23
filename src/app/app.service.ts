@@ -23,4 +23,9 @@ export class AppService {
   sendCoins(to: string, from: string, amount: number) {
     return this.http.post('http://localhost:8080/transfer', { to, from, amount }).map(res => res.json());
   }
+
+  getTransactions() {
+    return this.http.get('http://localhost:8080/transactions')
+      .map(res => res.json().reverse()); // reverse to show transactions from latest
+  }
 }

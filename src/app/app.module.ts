@@ -7,21 +7,22 @@ import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import { OperationsComponent } from './operations/operations.component';
 import { WalletComponent } from './wallet/wallet.component';
-import { OperationsService } from './operations/operations.service';
+import { HashNamePipe } from './hash.pipe';
 import 'rxjs/Rx';
 
 @NgModule({
   declarations: [
     AppComponent,
     OperationsComponent,
-    WalletComponent
+    WalletComponent,
+    HashNamePipe
   ],
   imports: [
     HttpModule,
     FormsModule,
     BrowserModule
   ],
-  providers: [AppService, OperationsService, { provide: 'Hashwords', useValue: window['hashwords']() }],
+  providers: [AppService, { provide: 'Hashwords', useValue: window['hashwords']() }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,21 +11,15 @@ import { EventEmitter } from '@angular/core';
 export class WalletComponent {
   @Input() wallet = null;
   @Output() transferCoins = new EventEmitter();
+  @Output() mineCoins = new EventEmitter();
 
   balance = 0;
   sendObj: { to: string, amount: number } = { to: '', amount: 1 };
 
-  constructor(private apiService: AppService, @Inject('Hashwords') public hashwords: any) {
+  constructor() { }
 
-  }
   mine() {
-    this.apiService.mineBlocks(this.wallet.hash).subscribe(res => {
-      this.updateBalance();
-    });
-  }
-
-  updateBalance() {
-    this.apiService.getBalance(this.wallet.hash).subscribe(balance => this.balance = balance);
+    this.mineCoins.emit(this.wallet.hash);
   }
 
   sendCoins(form) {
