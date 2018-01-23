@@ -24,7 +24,7 @@ export class AppService {
    * @param  {string} address hash address of the wallet
    */
   getBalance(address: string) {
-    return this.http.get(`${this.selectedHost}balance/${address}`).map(res => res.json());
+    return this.http.get(`${this.selectedHost}/balance/${address}`).map(res => res.json());
   }
 
   sendCoins(to: string, from: string, amount: number) {

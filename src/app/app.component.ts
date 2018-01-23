@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { OnInit, OnDestroy } from '@angular/core';
 import { AppService } from 'app/app.service';
 import { WalletComponent } from './wallet/wallet.component';
-import CoinKey from 'coinkey'
+import * as CoinKey from 'coinkey';
 
 @Component({
   selector: 'app-root',
