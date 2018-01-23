@@ -20,6 +20,9 @@ export class AppComponent implements OnInit, OnDestroy {
   interval: any;
 
   constructor(public appService: AppService) {
+    this.appService.getHosts().subscribe(res => {
+      console.log(res);
+    });
     this.hosts = this.appService.hosts;
     this.selectedHost = this.appService.selectedHost;
   }

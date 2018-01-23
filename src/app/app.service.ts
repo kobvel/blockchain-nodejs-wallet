@@ -13,6 +13,9 @@ export class AppService {
     this.selectedHost = this.hosts[0];
   }
 
+  getHosts() {
+    return this.http.get('./hosts').map(res => res.json());
+  }
   /**
    * @param  {string} address hash address of the wallet
    */
