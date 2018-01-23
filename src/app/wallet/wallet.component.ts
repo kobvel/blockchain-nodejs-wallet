@@ -9,6 +9,7 @@ import { Component, Input, Inject } from '@angular/core';
 })
 export class WalletComponent {
   @Input() wallet = null;
+  balance = 0;
   sendObj: { to: string, amount: number } = { to: '', amount: 1 };
 
   constructor(private apiService: AppService, @Inject('Hashwords') public hashwords: any) {
@@ -16,21 +17,19 @@ export class WalletComponent {
   }
   mine() {
     this.apiService.mineBlocks(this.wallet.hash).subscribe(res => {
-      console.log(res);
+      this.updateBalance();
     });
   }
 
   updateBalance() {
-    this.apiService.getBalance(this.wallet.hash).subscribe(balance => {
-      console.log(balance);
-    });
+    this.apiService.getBalance(this.wallet.hash).subscribe(balance => this.balance = balance);
   }
 
   sendCoins(form) {
     if (form.valid) {
       this.apiService.sendCoins(form.value.to, this.wallet.hash, form.value.amount)
         .subscribe(res => {
-          console.log(res);
+          this.updateBalance();
         });
     } else {
       alert('Something wrong with the form!');
