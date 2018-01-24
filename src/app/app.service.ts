@@ -9,8 +9,10 @@ export class AppService {
   hosts: string[] = [];
   selectedHost = ''
   constructor(private http: Http) {
-    this.hosts = environment.peers.split(';');
-    this.selectedHost = this.hosts[0];
+    this.getHosts().subscribe(hosts => {
+      this.hosts = hosts;
+      this.selectedHost = this.hosts[0];
+    });
   }
 
   getHosts() {
