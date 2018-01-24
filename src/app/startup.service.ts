@@ -1,5 +1,5 @@
 import { Http } from '@angular/http';
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 
 @Injectable()
 export class StartupService {
@@ -9,11 +9,16 @@ export class StartupService {
   constructor(private http: Http) { }
 
   load(): Promise<any> {
-    return this.http
-      .get('/hosts')
-      .toPromise()
-      .then((res: any) => this.hostData = res.json())
-      .catch((err: any) => Promise.resolve());
+    if (isDevMode) {
+      // for the local development
+      this.hostData = ['http://localhost:8080'];
+      return Promise.resolve(true);
+    } {
+      return this.http.get('/hosts').toPromise()
+        .then((res: any) => this.hostData = res.json())
+        .catch((err: any) => Promise.resolve());
+    }
+
   }
 
 }
