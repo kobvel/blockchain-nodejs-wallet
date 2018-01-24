@@ -2,7 +2,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Component } from '@angular/core';
 import { OnInit, OnDestroy } from '@angular/core';
 import { AppService } from 'app/app.service';
-import { WalletComponent } from './wallet/wallet.component';
+import { StartupService } from 'app/startup.service';
 import * as CoinKey from 'coinkey';
 
 @Component({
@@ -14,28 +14,33 @@ export class AppComponent implements OnInit, OnDestroy {
   wallets: any[] = [];
   txs: any[] = [];
   sub: Subscription;
+  error = false;
   hosts: string[] = [];
   selectedHost = this.appService.selectedHost;
   walletFilter = '';
   interval: any;
 
-  constructor(public appService: AppService) {
-    this.hosts = this.appService.hosts;
-    this.selectedHost = this.appService.selectedHost;
-  }
+  constructor(
+    public appService: AppService,
+    private startupService: StartupService) { }
 
   ngOnInit() {
-    this.newWallet();
+    if (!this.startupService.hostData) {
+      this.error = true;
+    } else {
+      this.newWallet();
+      this.hosts = this.appService.hosts;
+      this.selectedHost = this.appService.selectedHost;
 
-    this.interval = setInterval(() => {
-      this.sub = this.appService.getTransactions().subscribe(txs => {
-        this.txs = txs.filter(tx => {
-          const bothAddresses = tx.from + tx.to;
-          return !this.walletFilter || bothAddresses.includes(this.walletFilter);
+      this.interval = setInterval(() => {
+        this.sub = this.appService.getTransactions().subscribe(txs => {
+          this.txs = txs.filter(tx => {
+            const bothAddresses = tx.from + tx.to;
+            return !this.walletFilter || bothAddresses.includes(this.walletFilter);
+          });
         });
-      });
-    }, 1000);
-
+      }, 1000);
+    }
   }
 
   ngOnDestroy() {

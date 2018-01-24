@@ -1,6 +1,6 @@
 <div class="container-fluid root">
 
-  <div class="row row-offcanvas row-offcanvas-right">
+  <div class="row row-offcanvas row-offcanvas-right" *ngIf="!error">
 
     <div class="col-12 col-lg-6">
       <div class="input-group mb-2">
@@ -8,7 +8,7 @@
           <option value="">All transactions</option>
           <option [value]="wallet.hash" *ngFor="let wallet of wallets">{{wallet.hash | hashname}}</option>
         </select>
-        <select class="custom-select ml-2" [ngModel]="selectedHost" (ngModelChange)="onHostChange($event)" >
+        <select class="custom-select ml-2" [ngModel]="selectedHost" (ngModelChange)="onHostChange($event)">
           <option [value]="host" *ngFor="let host of hosts">{{host}}</option>
         </select>
       </div>
@@ -26,5 +26,19 @@
       </app-wallet>
     </div>
 
+  </div>
+
+  <div class="row" *ngIf="error">
+    <div class="col-md-12">
+      <div class="error-template">
+        <h1>
+          Oops!</h1>
+        <h2>
+          404 Not Found</h2>
+        <div class="error-details">
+          Can't get Hosts from the server
+        </div>
+      </div>
+    </div>
   </div>
 </div>

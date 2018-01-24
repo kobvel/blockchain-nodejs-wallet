@@ -1,19 +1,27 @@
 const express = require('express');
 const path = require('path');
-const http_port = process.env.HTTP_PORT || 4200;
+const http_port = process.env.HTTP_PORT || 8080;
 const PORTS = process.env.PORTS ? process.env.PORTS.split(';') : [];
 const HOST = process.env.HOST || 'HOST';
 
+const app = express();
 
 const trimHost = HOST.match(/\/\/(.*):/);
-const hostname = trimHost.length > 0 ? trimHost[0] : '';
-const app = express();
+const hostname = '';
+
+if (trimHost && trimHost.length > 0) {
+  hostname = trimHost[0];
+}
 
 
 app.use(express.static(path.join(__dirname, './dist')));
 app.get('/hosts', (req, res) => {
-  const hosts = PORTS.map(port => `http:${hostname}${port}`);
-  res.send(hosts);
+  let hosts = PORTS.map(port => `http:${hostname}${port}`);
+  // if (!hosts.length) {
+  //   res.send(500);
+  // }
+  hosts = ['http://localhost:8080', 'http://localhost:3000']
+  res.send(JSON.stringify(hosts));
 });
 
 app.listen(http_port, () => console.log('Listening http on port: ' + http_port));

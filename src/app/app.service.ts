@@ -1,3 +1,4 @@
+import { StartupService } from './startup.service';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { environment } from 'environments/environment';
@@ -7,17 +8,15 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class AppService {
   hosts: string[] = [];
-  selectedHost = ''
-  constructor(private http: Http) {
-    this.getHosts().subscribe(hosts => {
-      this.hosts = hosts;
+  selectedHost = '';
+
+  constructor(private http: Http, private startupService: StartupService) {
+    if (startupService.hostData) {
+      this.hosts = startupService.hostData;
       this.selectedHost = this.hosts[0];
-    });
+    }
   }
 
-  getHosts() {
-    return this.http.get('./hosts').map(res => res.json());
-  }
   /**
    * @param  {string} address hash address of the wallet
    */
