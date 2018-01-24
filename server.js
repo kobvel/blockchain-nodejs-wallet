@@ -17,10 +17,11 @@ if (trimHost && trimHost.length > 0) {
 app.use(express.static(path.join(__dirname, './dist')));
 app.get('/hosts', (req, res) => {
   let hosts = PORTS.map(port => `http:${hostname}${port}`);
-  // if (!hosts.length) {
-  //   res.send(500);
-  // }
-  hosts = ['http://localhost:8080', 'http://localhost:3000']
+
+  if (!hosts.length) {
+    res.send(500);
+  }
+
   res.send(JSON.stringify(hosts));
 });
 
