@@ -62,17 +62,13 @@ export class AppComponent implements OnInit, OnDestroy {
   sendCoins(event: { to: string, from: string, amount: number }) {
     this.appService.sendCoins(event.to, event.from, event.amount).subscribe(res => {
 
-      // update balances if wallet was involved in the transfer
-      Object.keys(this.wallets).forEach(address => {
-
-      });
-
       this.wallets.forEach(wallet => {
         const address = wallet.hash;
         if (address === res.from || address === res.to) {
           this.updateBalance(wallet.hash);
         }
       });
+
     });
   }
 
