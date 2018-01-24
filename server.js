@@ -7,7 +7,7 @@ const HOST = process.env.HOST || 'HOST';
 const app = express();
 
 const trimHost = HOST.match(/\/\/(.*):/);
-const hostname = '';
+let hostname = '';
 
 if (trimHost && trimHost.length > 0) {
   hostname = trimHost[0];
