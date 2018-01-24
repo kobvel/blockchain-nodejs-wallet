@@ -1,13 +1,33 @@
+import { StartupService } from 'app/startup.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
+import { AppService } from 'app/app.service';
+import { HashNamePipe } from './hash.pipe';
+import { WalletComponent } from './wallet/wallet.component';
+import { OperationsComponent } from './operations/operations.component';
 import { TestBed, async } from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
+      imports: [
+        HttpModule,
+        FormsModule,
+        BrowserModule
       ],
+      declarations: [
+        HashNamePipe,
+        AppComponent,
+        OperationsComponent,
+        WalletComponent
+      ],
+      providers: [
+        AppService,
+        StartupService,
+        { provide: 'Hashwords', useValue: window['hashwords']() }
+      ]
     }).compileComponents();
   }));
 
@@ -17,16 +37,11 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'app'`, async(() => {
+  it(`shoult be initialized with the default vars'`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app');
+
+    expect(app.walletFilter).toEqual('');
   }));
 
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to app!!');
-  }));
 });

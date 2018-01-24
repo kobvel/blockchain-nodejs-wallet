@@ -6,7 +6,6 @@
     "ng": "ng",
     "serve": "ng serve",
     "start": "node server.js",
-    "prebuild": "node ./prebuild.js",
     "build": "ng build --env=prod",
     "test": "ng test",
     "lint": "ng lint",
